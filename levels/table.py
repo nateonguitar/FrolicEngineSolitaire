@@ -11,8 +11,7 @@ class TableLevel(Level):
         pass
 
     def draw(self, screen: Screen):
-        screen.draw_string('Table', Vector2(1, 1))
+        pass
 
     def keydown(self, key: keyboard.Key):
-        if key == keyboard.Key.space:
-            self.game_instance.debug_info['Space Pressed'] = True
+        pass

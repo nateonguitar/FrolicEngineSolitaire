@@ -11,7 +11,6 @@ class Solitaire(Game):
         self.show_debug_info = True
         self.level: Level = None
         self.set_level(LaunchLevel)
-        self.debug_info['Space Pressed'] = False
 
     def update(self, deltatime: float):
         self.level.update(deltatime)
