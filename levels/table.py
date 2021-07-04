@@ -4,26 +4,33 @@ from pynput import keyboard
 
 from .level import Level
 from game_objects.card import Card
+from game_objects.stack import TableStack
 
 class TableLevel(Level):
     def __init__(self):
         super().__init__()
-        self.deck = GameObject()
-        self.deck.position = Vector2(1, 1)
-        self.deck.cards = []
-        self.deck.cards.append(Card(value='2', suit='♥'))
-        self.deck.cards.append(Card(value='3', suit='♠'))
-        self.deck.cards.append(Card(value='4', suit='♦'))
-        self.deck.cards.append(Card(value='5', suit='♣'))
+        deck: list[Card] = []
+        for suit in ['♥', '♦', '♠', '♣']:
+            for i in range(14):
+                deck.append(Card(suit=suit, value=i))
+
+        self.table_stacks: list[TableStack] = []
+        for i in range(7):
+            stack = TableStack()
+            stack.position = Vector2(i*5, 1)
+            for j in range(i+1):
+                card = deck.pop()
+                stack.append(card)
+                if j == i:
+                    card.flip()
+            self.table_stacks.append(stack)
 
     def update(self, deltatime: float):
         pass
 
     def draw(self, screen: Screen):
-        for i in range(len(self.deck.cards)):
-            card: Card = self.deck.cards[i]
-            position = Vector2(self.deck.position.x, self.deck.position.y + (i*2))
-            screen.draw_matrix(card.matrix, position)
+        for table_stack in self.table_stacks:
+            table_stack.draw(screen)
 
     def keydown(self, key: keyboard.Key):
         pass
