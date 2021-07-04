@@ -17,7 +17,7 @@ class TableLevel(Level):
         self.deck.cards.append(Card(value='5', suit='♤'))
 
     def update(self, deltatime: float):
-        self.deck.position.x += 1
+        pass
 
     def draw(self, screen: Screen):
         for i in range(len(self.deck.cards)):
