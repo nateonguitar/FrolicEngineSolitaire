@@ -1,6 +1,13 @@
-from frolic import GameObject, Screen, Vector2
+from frolic import GameObject, Matrix, Screen, Vector2
 
-from .card import Card, face_down_matrix
+from .card import Card
+
+empty_stack_matrix = Matrix([
+    ['┌', ' ', ' ',' ', '┐'],
+    [' ', ' ', ' ',' ', ' '],
+    [' ', ' ', ' ',' ', ' '],
+    ['└', ' ', ' ',' ', '┘']
+])
 
 class Stack(GameObject):
     def __init__(self):
@@ -28,10 +35,14 @@ class Stack(GameObject):
 
 class TableStack(Stack):
     def draw(self, screen: Screen):
-        for i in range(len(self._cards)):
-            card = self._cards[i]
-            position = Vector2(self.position.x, self.position.y + (i*2))
-            if card.face_down:
-                screen.draw_matrix(face_down_matrix, position)
-            else:
-                screen.draw_matrix(card.matrix, position)
+        if len(self._cards) == 0:
+            screen.draw_matrix(empty_stack_matrix, self.position)
+        else:
+            yoffset = 0
+            for card in self._cards:
+                position = Vector2(self.position.x, self.position.y + yoffset)
+                card.draw(screen, position)
+                if card.face_down:
+                    yoffset += 1
+                else:
+                    yoffset += 2

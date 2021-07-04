@@ -1,4 +1,6 @@
-from frolic import GameObject, Screen, Vector2
+import random
+
+from frolic import Screen, Vector2
 from pynput import keyboard
 
 
@@ -11,13 +13,14 @@ class TableLevel(Level):
         super().__init__()
         deck: list[Card] = []
         for suit in ['♥', '♦', '♠', '♣']:
-            for i in range(14):
+            for i in range(1, 14):
                 deck.append(Card(suit=suit, value=i))
+        random.shuffle(deck)
 
         self.table_stacks: list[TableStack] = []
         for i in range(7):
             stack = TableStack()
-            stack.position = Vector2(i*5, 1)
+            stack.position = Vector2(i*6, 1)
             for j in range(i+1):
                 card = deck.pop()
                 stack.append(card)
