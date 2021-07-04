@@ -5,7 +5,7 @@ from .level import Level
 class LaunchLevel(Level):
     def __init__(self):
         super().__init__()
-        self.time_to_wait = 3
+        self.time_to_wait = 0.5
         self.time_waited = 0
 
     def update(self, deltatime: float):
