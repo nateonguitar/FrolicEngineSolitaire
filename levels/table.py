@@ -11,10 +11,10 @@ class TableLevel(Level):
         self.deck = GameObject()
         self.deck.position = Vector2(1, 1)
         self.deck.cards = []
-        self.deck.cards.append(Card(value='2', suit='X'))
-        self.deck.cards.append(Card(value='3', suit='♤'))
-        self.deck.cards.append(Card(value='4', suit='O'))
-        self.deck.cards.append(Card(value='5', suit='♤'))
+        self.deck.cards.append(Card(value='2', suit='♥'))
+        self.deck.cards.append(Card(value='3', suit='♠'))
+        self.deck.cards.append(Card(value='4', suit='♦'))
+        self.deck.cards.append(Card(value='5', suit='♣'))
 
     def update(self, deltatime: float):
         pass
